@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <link rel="icon" href="https://quseprdus1.blob.core.windows.net/kora-business-images/user-media/463f7a5f-0a7e-488c-80c5-a2d2e6ca3b48/de8c94d8-887e-4625-825f-ec262dbc28df/1785776376_j315so.png">
+<link href="https://quseprdus1.blob.core.windows.net/kora-business-images/user-media/463f7a5f-0a7e-488c-80c5-a2d2e6ca3b48/de8c94d8-887e-4625-825f-ec262dbc28df/1785776376_j315so.png" rel="icon"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Antonio's Italian Bistro – Darien, CT</title>
@@ -12,8 +13,7 @@
 <meta content="website" property="og:type"/>
 <meta content="https://res.cloudinary.com/gonation/gonation.data.prod/erl04ed5wjn9jphlj7rz" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-
-<link href="https://quseprdus1.blob.core.windows.net/kora-business-images/user-media/463f7a5f-0a7e-488c-80c5-a2d2e6ca3b48/de8c94d8-887e-4625-825f-ec262dbc28df/1785776376_j315so.png" rel="icon" type="image/png"/>
+<link href="https://quseprdus1.blob.core.windows.net/kora-business-images/user-media/463f7a5f-0a7e-488c-80c5-a2d2e6ca3b48/de8c94d8-887e-4625-825f-ec262dbc28df/1785776376_j315so.png" rel="icon" type="image/png">
 <link href="https://quseprdus1.blob.core.windows.net/kora-business-images/user-media/463f7a5f-0a7e-488c-80c5-a2d2e6ca3b48/de8c94d8-887e-4625-825f-ec262dbc28df/1785776376_j315so.png" rel="apple-touch-icon"/>
 <link as="image" href="https://res.cloudinary.com/gonation/gonation.data.prod/erl04ed5wjn9jphlj7rz" rel="preload"/>
 <link href="assets/styles.css" rel="stylesheet"/>
@@ -838,7 +838,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto+Slab:wght@400;600;700&display=swap">
 <!-- KORA_GOOGLE_FONTS_END -->
-</head>
+</link></head>
 <body>
 <div class="site-wrapper">
 <!-- ============================================================
@@ -852,6 +852,7 @@
 <nav aria-label="Primary navigation">
 <ul class="nav-links" role="list">
 <li><a href="#about">About</a></li>
+<li><a href="#menu">Menu</a></li>
 <li><a href="#hours_location">Hours &amp; Location</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
@@ -866,6 +867,7 @@
 <!-- Mobile navigation drawer -->
 <nav aria-label="Mobile navigation" class="nav-mobile" id="nav-mobile">
 <a href="#about">About</a>
+<a href="#menu">Menu</a>
 <a href="#hours_location">Hours &amp; Location</a>
 <a href="#contact">Contact</a>
 <a class="btn btn-outline-cream" href="#contact" style="text-align:center; margin-top:0.5rem;">Reserve a Table</a>
@@ -1501,6 +1503,1196 @@
 </div>
 </div>
 </div><!-- /.about-section -->
+</section>
+<section id="menu">
+<style>
+  /* ============================================================
+     MENU SECTION — specific styles
+  ============================================================ */
+  .menu-section {
+    background-color: #fff;
+    padding-block: var(--space-section);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-bg-letter {
+    position: absolute;
+    top: 50%;
+    right: -0.05em;
+    transform: translateY(-50%);
+    font-family: var(--f-heading);
+    font-size: clamp(14rem, 26vw, 26rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--c-primary);
+    opacity: 0.03;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .menu-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  /* Section header */
+  .menu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .menu-eyebrow {
+    font-family: var(--f-body);
+    font-size: var(--ts-xs);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .menu-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background-color: var(--c-primary);
+    flex-shrink: 0;
+  }
+
+  .menu-heading {
+    font-family: var(--f-heading);
+    font-size: clamp(var(--ts-3xl), 4vw, var(--ts-5xl));
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--c-accent);
+    margin-bottom: 0;
+  }
+
+  .menu-heading em {
+    font-style: italic;
+    color: var(--c-primary);
+  }
+
+  .menu-rule {
+    width: 3rem;
+    height: 3px;
+    background-color: var(--c-primary);
+    margin-top: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .menu-hours-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--c-primary);
+    color: var(--c-secondary);
+    font-family: var(--f-body);
+    font-size: var(--ts-xs);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    margin-top: 1.25rem;
+  }
+
+  /* ---- Tab navigation ---- */
+  .menu-tabs-wrap {
+    position: sticky;
+    top: 5rem;
+    z-index: 10;
+    background-color: #fff;
+    border-bottom: 2px solid var(--c-cream-dark);
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .menu-tabs-wrap::-webkit-scrollbar { display: none; }
+
+  .menu-tabs {
+    display: flex;
+    gap: 0;
+    list-style: none;
+    min-width: max-content;
+  }
+
+  .menu-tab-btn {
+    font-family: var(--f-body);
+    font-size: var(--ts-xs);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-accent);
+    opacity: 0.45;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.9rem 1.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-bottom: -2px;
+    transition: color var(--dur-fast) ease,
+                opacity var(--dur-fast) ease,
+                border-color var(--dur-fast) ease;
+  }
+
+  .menu-tab-btn:hover {
+    opacity: 0.75;
+    color: var(--c-primary);
+  }
+
+  .menu-tab-btn.active {
+    color: var(--c-primary);
+    opacity: 1;
+    border-bottom-color: var(--c-primary);
+  }
+
+  /* ---- Category panels ---- */
+  .menu-panel {
+    display: none;
+  }
+
+  .menu-panel.active {
+    display: block;
+  }
+
+  .menu-category-title {
+    font-family: var(--f-heading);
+    font-size: clamp(var(--ts-2xl), 3vw, var(--ts-4xl));
+    font-weight: 700;
+    color: var(--c-accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .menu-category-title em {
+    font-style: italic;
+    color: var(--c-primary);
+  }
+
+  .menu-category-rule {
+    width: 3rem;
+    height: 3px;
+    background-color: var(--c-primary);
+    margin-bottom: 2.5rem;
+    margin-top: 0.75rem;
+  }
+
+  /* ---- Item grid ---- */
+  .menu-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.5px;
+    background-color: var(--c-cream-dark);
+    border: 1.5px solid var(--c-cream-dark);
+  }
+
+  .menu-item {
+    background-color: #fff;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: background-color var(--dur-fast) ease;
+  }
+
+  .menu-item:hover {
+    background-color: var(--c-secondary);
+  }
+
+  .menu-item-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .menu-item-name {
+    font-family: var(--f-heading);
+    font-size: var(--ts-lg);
+    font-weight: 600;
+    color: var(--c-accent);
+    line-height: 1.25;
+    flex: 1;
+  }
+
+  .menu-item-price {
+    font-family: var(--f-body);
+    font-size: var(--ts-base);
+    font-weight: 700;
+    color: var(--c-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .menu-item-desc {
+    font-family: var(--f-body);
+    font-size: var(--ts-sm);
+    color: #5a4a4a;
+    line-height: 1.65;
+  }
+
+  /* Attribute badge (e.g. * raw/undercooked warning) */
+  .menu-item-attr {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--f-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    opacity: 0.75;
+    margin-top: 0.25rem;
+  }
+
+  /* Multi-price (glass / bottle) */
+  .menu-item-prices {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+
+  .menu-item-price-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+  }
+
+  .menu-item-price-label {
+    font-family: var(--f-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-accent);
+    opacity: 0.45;
+  }
+
+  .menu-item-price-val {
+    font-family: var(--f-body);
+    font-size: var(--ts-base);
+    font-weight: 700;
+    color: var(--c-primary);
+  }
+
+  /* ---- Contorni simple list ---- */
+  .menu-contorni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 1.5px;
+    background-color: var(--c-cream-dark);
+    border: 1.5px solid var(--c-cream-dark);
+  }
+
+  .menu-contorni-item {
+    background-color: #fff;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: background-color var(--dur-fast) ease;
+  }
+
+  .menu-contorni-item:hover {
+    background-color: var(--c-secondary);
+  }
+
+  .menu-contorni-name {
+    font-family: var(--f-heading);
+    font-size: var(--ts-base);
+    font-weight: 600;
+    color: var(--c-accent);
+  }
+
+  .menu-contorni-price {
+    font-family: var(--f-body);
+    font-size: var(--ts-base);
+    font-weight: 700;
+    color: var(--c-primary);
+    white-space: nowrap;
+  }
+
+  /* ---- Cocktails shared price banner ---- */
+  .menu-shared-price-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--c-primary);
+    color: var(--c-secondary);
+    padding: 0.6rem 1.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--f-body);
+    font-size: var(--ts-sm);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .menu-shared-price-banner span {
+    font-size: var(--ts-xl);
+    font-family: var(--f-heading);
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ---- Pizza build-your-own add-ons ---- */
+  .menu-addons {
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(12,12,12,0.08);
+    padding-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .menu-addons-label {
+    font-family: var(--f-body);
+    font-size: var(--ts-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .menu-addon-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-family: var(--f-body);
+    font-size: var(--ts-sm);
+    color: #5a4a4a;
+  }
+
+  .menu-addon-price {
+    font-weight: 700;
+    color: var(--c-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ---- Wine table layout ---- */
+  .menu-wine-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--f-body);
+    font-size: var(--ts-sm);
+  }
+
+  .menu-wine-table thead tr {
+    background-color: var(--c-primary);
+    color: var(--c-secondary);
+  }
+
+  .menu-wine-table thead th {
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+    font-size: var(--ts-xs);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .menu-wine-table thead th:last-child,
+  .menu-wine-table thead th:nth-last-child(2) {
+    text-align: right;
+  }
+
+  .menu-wine-table tbody tr {
+    border-bottom: 1px solid var(--c-cream-dark);
+    transition: background-color var(--dur-fast) ease;
+  }
+
+  .menu-wine-table tbody tr:hover {
+    background-color: var(--c-secondary);
+  }
+
+  .menu-wine-table tbody td {
+    padding: 0.85rem 1.25rem;
+    color: var(--c-accent);
+    vertical-align: middle;
+  }
+
+  .menu-wine-table tbody td:last-child,
+  .menu-wine-table tbody td:nth-last-child(2) {
+    text-align: right;
+    font-weight: 700;
+    color: var(--c-primary);
+    white-space: nowrap;
+  }
+
+  .menu-wine-table tbody td:nth-last-child(2) {
+    font-weight: 400;
+    color: var(--c-accent);
+    opacity: 0.65;
+  }
+
+  /* ---- Bottle-only wine list ---- */
+  .menu-bottle-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.5px;
+    background-color: var(--c-cream-dark);
+    border: 1.5px solid var(--c-cream-dark);
+  }
+
+  .menu-bottle-item {
+    background-color: #fff;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: background-color var(--dur-fast) ease;
+  }
+
+  .menu-bottle-item:hover {
+    background-color: var(--c-secondary);
+  }
+
+  .menu-bottle-name {
+    font-family: var(--f-heading);
+    font-size: var(--ts-base);
+    font-weight: 600;
+    color: var(--c-accent);
+    line-height: 1.35;
+  }
+
+  .menu-bottle-price {
+    font-family: var(--f-body);
+    font-size: var(--ts-base);
+    font-weight: 700;
+    color: var(--c-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ---- Footnotes ---- */
+  .menu-footnotes {
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    background-color: var(--c-secondary);
+    border-left: 3px solid var(--c-primary);
+  }
+
+  .menu-footnote {
+    font-family: var(--f-body);
+    font-size: var(--ts-xs);
+    color: #5a4a4a;
+    line-height: 1.7;
+  }
+
+  .menu-footnote + .menu-footnote {
+    margin-top: 0.35rem;
+  }
+
+  /* ---- Wine sub-section heading ---- */
+  .menu-wine-sub-heading {
+    font-family: var(--f-heading);
+    font-size: var(--ts-xl);
+    font-weight: 600;
+    color: var(--c-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--c-cream-dark);
+  }
+
+  .menu-wine-sub-heading:first-of-type {
+    margin-top: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .menu-wine-table {
+      font-size: var(--ts-xs);
+    }
+    .menu-wine-table tbody td,
+    .menu-wine-table thead th {
+      padding: 0.65rem 0.75rem;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .menu-item {
+      padding: 1.25rem;
+    }
+    .menu-tabs-wrap {
+      top: 4.5rem;
+    }
+  }
+</style>
+<div class="menu-section">
+<span aria-hidden="true" class="menu-bg-letter">M</span>
+<div class="menu-inner">
+<!-- Section header -->
+<div class="menu-header">
+<p class="menu-eyebrow reveal">All Day Menu</p>
+<h2 class="menu-heading reveal">Our <em>Menu</em></h2>
+<div aria-hidden="true" class="menu-rule reveal"></div>
+<div class="menu-hours-badge reveal">
+<svg aria-hidden="true" fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="13"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Available Daily 11:00 AM – Close
+      </div>
+</div>
+<!-- Tab navigation -->
+<div aria-label="Menu categories" class="menu-tabs-wrap" role="tablist">
+<ul class="menu-tabs" role="list">
+<li role="presentation"><button aria-controls="panel-antipasti" aria-selected="true" class="menu-tab-btn active" data-panel="panel-antipasti" role="tab">Antipasti</button></li>
+<li role="presentation"><button aria-controls="panel-insalata" aria-selected="false" class="menu-tab-btn" data-panel="panel-insalata" role="tab">Insalata</button></li>
+<li role="presentation"><button aria-controls="panel-pasta" aria-selected="false" class="menu-tab-btn" data-panel="panel-pasta" role="tab">Pasta</button></li>
+<li role="presentation"><button aria-controls="panel-primi" aria-selected="false" class="menu-tab-btn" data-panel="panel-primi" role="tab">Primi</button></li>
+<li role="presentation"><button aria-controls="panel-carne" aria-selected="false" class="menu-tab-btn" data-panel="panel-carne" role="tab">Carne</button></li>
+<li role="presentation"><button aria-controls="panel-pizza" aria-selected="false" class="menu-tab-btn" data-panel="panel-pizza" role="tab">Pizza</button></li>
+<li role="presentation"><button aria-controls="panel-contorni" aria-selected="false" class="menu-tab-btn" data-panel="panel-contorni" role="tab">Contorni</button></li>
+<li role="presentation"><button aria-controls="panel-cocktails" aria-selected="false" class="menu-tab-btn" data-panel="panel-cocktails" role="tab">Cocktails</button></li>
+<li role="presentation"><button aria-controls="panel-wine" aria-selected="false" class="menu-tab-btn" data-panel="panel-wine" role="tab">Wine</button></li>
+</ul>
+</div>
+<!-- ===== ANTIPASTI ===== -->
+<div class="menu-panel active" id="panel-antipasti" role="tabpanel">
+<h3 class="menu-category-title"><em>Antipasti</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Burrata e Prosciutto</span>
+<span class="menu-item-price">$19</span>
+</div>
+<p class="menu-item-desc">Creamy burrata, San Daniele prosciutto, roasted peppers</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Polpette</span>
+<span class="menu-item-price">$13</span>
+</div>
+<p class="menu-item-desc">Meatballs, marinara, ricotta cheese</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Calamari Fritti</span>
+<span class="menu-item-price">$18</span>
+</div>
+<p class="menu-item-desc">Lightly battered calamari, cherry peppers and fra diavolo</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Truffle Parmesan Garlic Bread</span>
+<span class="menu-item-price">$12</span>
+</div>
+<p class="menu-item-desc">Truffle butter, roasted garlic, parmesan, melted mozzarella, marinara sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Vongole Oreganata</span>
+<span class="menu-item-price">$18</span>
+</div>
+<p class="menu-item-desc">Little neck clams, seasoned breadcrumbs, lemon</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Goat Cheese Fritti</span>
+<span class="menu-item-price">$16</span>
+</div>
+<p class="menu-item-desc">Roasted marinated beets, balsamic glaze, baby arugula</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Polpo</span>
+<span class="menu-item-price">$18</span>
+</div>
+<p class="menu-item-desc">Grilled octopus roasted heirloom tomatoes, pewee potatoes, spicy chorizo</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Cozze</span>
+<span class="menu-item-price">$16</span>
+</div>
+<p class="menu-item-desc">PEI Mussels, fava beans, cilantro, curry, cream</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Buratta Fritta</span>
+<span class="menu-item-price">$15</span>
+</div>
+<p class="menu-item-desc">Breaded burrata golden fried, served over pomodoro sauce with San Daniele prosciutto and crostini</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Lamb Lollipops</span>
+<span class="menu-item-price">$24</span>
+</div>
+<p class="menu-item-desc">Balsamic glaze</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Cavolini</span>
+<span class="menu-item-price">$12</span>
+</div>
+<p class="menu-item-desc">Crispy brussels sprouts tossed with hot honey and pancetta</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Caprese</span>
+<span class="menu-item-price">$17</span>
+</div>
+<p class="menu-item-desc">Mozzarella cheese, sliced tomatoes, basil, EVOO, balsamic</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Eggplant Rollatini</span>
+<span class="menu-item-price">$18</span>
+</div>
+<p class="menu-item-desc">Thinly sliced eggplant rolled in ricotta, spinach and herbs, baked and topped with marinara and melted mozzarella</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Brasato di Costolette con Polenta</span>
+<span class="menu-item-price">$22</span>
+</div>
+<p class="menu-item-desc">Barolo braised short rib, crispy polenta, gorgonzola sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Scarola e Fagioli</span>
+<span class="menu-item-price">$13</span>
+</div>
+<p class="menu-item-desc">Escarole and bean soup in a savory broth with garlic and olive oil</p>
+</div>
+</div>
+</div>
+<!-- ===== INSALATA ===== -->
+<div class="menu-panel" id="panel-insalata" role="tabpanel">
+<h3 class="menu-category-title"><em>Insalata</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Caprese</span>
+<span class="menu-item-price">$17</span>
+</div>
+<p class="menu-item-desc">Mozzarella cheese, sliced tomatoes, basil, EVOO, balsamic</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Caesar</span>
+<span class="menu-item-price">$15</span>
+</div>
+<p class="menu-item-desc">Organic romaine, caesar dressing, parmesan tuile, focaccia, focaccia croutons</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Tricolore</span>
+<span class="menu-item-price">$16</span>
+</div>
+<p class="menu-item-desc">Mixed greens, endive, radicchio, shaved</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Baby Arugula</span>
+<span class="menu-item-price">$17</span>
+</div>
+<p class="menu-item-desc">Crispy apple, roasted almonds, shaved parmesan, tossed with lemon vinaigrette</p>
+</div>
+</div>
+</div>
+<!-- ===== PASTA ===== -->
+<div class="menu-panel" id="panel-pasta" role="tabpanel">
+<h3 class="menu-category-title"><em>Pasta</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Penne Vodka</span>
+<span class="menu-item-price">$26</span>
+</div>
+<p class="menu-item-desc">Tomato sauce, vodka cream, pancetta</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Linguine Alle Vongole</span>
+<span class="menu-item-price">$32</span>
+</div>
+<p class="menu-item-desc">Little neck clams, garlic, white wine, parsley</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Spaghetti Frutti di Mare</span>
+<span class="menu-item-price">$37</span>
+</div>
+<p class="menu-item-desc">Squid ink spaghetti, sautéed with jumbo shrimp, calamari, mussels, clams, calabrian peppers in a fra diavolo sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Gnocchi Bolognese</span>
+<span class="menu-item-price">$30</span>
+</div>
+<p class="menu-item-desc">Bolognese sauce, homemade fresh gnocchi, Pecorino Romano</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Nonna's Sunday Sauce</span>
+<span class="menu-item-price">$28</span>
+</div>
+<p class="menu-item-desc">Rigatoni, beef braciole, meatball and sausage</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Gamberetto Toscana</span>
+<span class="menu-item-price">$34</span>
+</div>
+<p class="menu-item-desc">Pappardelle, jumbo shrimp, baby spinach, sundried tomatoes, creamy garlic sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Tortellini Alla Panna</span>
+<span class="menu-item-price">$27</span>
+</div>
+<p class="menu-item-desc">Cheese tortellini with prosciutto and peas in a creamy alfredo sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Cavatelli</span>
+<span class="menu-item-price">$28</span>
+</div>
+<p class="menu-item-desc">Grilled chicken, broccoli rabe, sun-dried tomatoes, garlic, olive oil</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Orecchiette</span>
+<span class="menu-item-price">$28</span>
+</div>
+<p class="menu-item-desc">Crumbled sausage, broccoli rabe, garlic, olive oil</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Manicotti</span>
+<span class="menu-item-price">$28</span>
+</div>
+<p class="menu-item-desc">Four cheese stuffed pasta, topped with marinara, melted mozzarella and grated pecorino romano</p>
+</div>
+</div>
+</div>
+<!-- ===== PRIMI ===== -->
+<div class="menu-panel" id="panel-primi" role="tabpanel">
+<h3 class="menu-category-title"><em>Primi</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Salmone</span>
+<span class="menu-item-price">$36</span>
+</div>
+<p class="menu-item-desc">Hidden Fjord salmon served with broccoli rabe, butternut squash, and a barolo red wine reduction</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Halibut</span>
+<span class="menu-item-price">$38</span>
+</div>
+<p class="menu-item-desc">Parmesan crusted, baby spinach, chopped tomatoes, beurre blanc, chives</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Branzino Al Forno</span>
+<span class="menu-item-price">$34</span>
+</div>
+<p class="menu-item-desc">Crispy branzino served with shaved brussels sprouts, cremini mushrooms, apricot compot</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Parmigiana di Melanazane</span>
+<span class="menu-item-price">$27</span>
+</div>
+<p class="menu-item-desc">Traditional eggplant parmesan, fresh mozzarella, basil</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Pollo Scarpariello</span>
+<span class="menu-item-price">$32</span>
+</div>
+<p class="menu-item-desc">Boneless chicken, hot sausage, hot cherry peppers, peewee potatoes</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Pollo Francese</span>
+<span class="menu-item-price">$29</span>
+</div>
+<p class="menu-item-desc">Chicken breast, egg-battered in a buttery lemon white wine sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Pollo Parmigiana</span>
+<span class="menu-item-price">$29</span>
+</div>
+<p class="menu-item-desc">Red onion, fresh mozzarella, balsamic drizzle</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Baccalà alla Livornese</span>
+<span class="menu-item-price">$34</span>
+</div>
+<p class="menu-item-desc">Atlantic cod, escarole and potatoes in a livornese sauce</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Pollo Capricciosa</span>
+<span class="menu-item-price">$28</span>
+</div>
+<p class="menu-item-desc">Breaded chicken breast, tricolore salad, cherry tomatoes, red onion, fresh mozzarella, balsamic drizzle</p>
+</div>
+</div>
+</div>
+<!-- ===== CARNE ===== -->
+<div class="menu-panel" id="panel-carne" role="tabpanel">
+<h3 class="menu-category-title"><em>Carne</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Scalloppine al Marsala</span>
+<span class="menu-item-price">$42</span>
+</div>
+<p class="menu-item-desc">Veal scallopini, mushroom, marsala, potatoes and broccoli rabe</p>
+<span class="menu-item-attr">* May be served undercooked</span>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Brasato di Costolette</span>
+<span class="menu-item-price">$38</span>
+</div>
+<p class="menu-item-desc">Barolo braised short rib, garlic mashed potatoes, roasted vegetables, cremini mushrooms</p>
+<span class="menu-item-attr">* May be served undercooked</span>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Agnello</span>
+<span class="menu-item-price">$48</span>
+</div>
+<p class="menu-item-desc">Herb-crusted lamb chop, brussels sprouts, roasted cauliflower, mint jelly</p>
+<span class="menu-item-attr">* May be served undercooked</span>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">N.Y. Strip</span>
+<span class="menu-item-price">$48</span>
+</div>
+<p class="menu-item-desc">Prime N.Y. Strip, sherry wine, mushroom, shallot demi-glace, roasted cauliflower, brussels sprouts</p>
+<span class="menu-item-attr">* May be served undercooked</span>
+</div>
+</div>
+<p class="menu-footnote" style="margin-top:1.25rem;">* Thoroughly cooking meats, poultry, seafood, shellfish, or eggs reduces the risk of food-borne illness.</p>
+</div>
+<!-- ===== PIZZA ===== -->
+<div class="menu-panel" id="panel-pizza" role="tabpanel">
+<h3 class="menu-category-title"><em>Pizza</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Margherita</span>
+<span class="menu-item-price">$17</span>
+</div>
+<p class="menu-item-desc">Tomato sauce, fresh mozzarella, basil, EVOO</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Prosciutto Parma</span>
+<span class="menu-item-price">$22</span>
+</div>
+<p class="menu-item-desc">San Daniele prosciutto, parmigiano, baby arugula, mozzarella</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">White Clam</span>
+<span class="menu-item-price">$24</span>
+</div>
+<p class="menu-item-desc">Chopped clams, fresh garlic, parsley, Italian herbs</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Melanzane in Paradiso</span>
+<span class="menu-item-price">$22</span>
+</div>
+<p class="menu-item-desc">Eggplant, sausage, creamy ricotta, mozzarella</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Tartufata</span>
+<span class="menu-item-price">$20</span>
+</div>
+<p class="menu-item-desc">Wild mushrooms, truffle oil, mozzarella</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Carne Amore</span>
+<span class="menu-item-price">$24</span>
+</div>
+<p class="menu-item-desc">Italian sausage, meatball, and pepperoni</p>
+</div>
+<div class="menu-item" style="grid-column: 1 / -1;">
+<div class="menu-item-header">
+<span class="menu-item-name">Build Your Own</span>
+</div>
+<p class="menu-item-desc">Cheese pizza — add your choice of toppings:</p>
+<div class="menu-addons">
+<p class="menu-addons-label">Add-On Toppings</p>
+<div class="menu-addon-row">
+<span>Mushrooms, cherry peppers, zucchini, eggplant</span>
+<span class="menu-addon-price">+$3.00 each</span>
+</div>
+<div class="menu-addon-row">
+<span>Sopressata, meatball or sausage, bacon</span>
+<span class="menu-addon-price">+$4.00 each</span>
+</div>
+<div class="menu-addon-row">
+<span>Grilled Chicken</span>
+<span class="menu-addon-price">+$5.00</span>
+</div>
+<div class="menu-addon-row">
+<span>Shrimp, clams, San Daniele prosciutto</span>
+<span class="menu-addon-price">+$7.00 each</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== CONTORNI ===== -->
+<div class="menu-panel" id="panel-contorni" role="tabpanel">
+<h3 class="menu-category-title"><em>Contorni</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-contorni-grid stagger-children">
+<div class="menu-contorni-item"><span class="menu-contorni-name">Sautéed Garlic Broccoli Rabe</span><span class="menu-contorni-price">$11</span></div>
+<div class="menu-contorni-item"><span class="menu-contorni-name">Roasted Potatoes</span><span class="menu-contorni-price">$11</span></div>
+<div class="menu-contorni-item"><span class="menu-contorni-name">Wilted Spinach</span><span class="menu-contorni-price">$11</span></div>
+<div class="menu-contorni-item"><span class="menu-contorni-name">Truffle Parmesan Fries</span><span class="menu-contorni-price">$11</span></div>
+<div class="menu-contorni-item"><span class="menu-contorni-name">Broccoli</span><span class="menu-contorni-price">$11</span></div>
+<div class="menu-contorni-item"><span class="menu-contorni-name">Escarole</span><span class="menu-contorni-price">$11</span></div>
+</div>
+</div>
+<!-- ===== SIGNATURE COCKTAILS ===== -->
+<div class="menu-panel" id="panel-cocktails" role="tabpanel">
+<h3 class="menu-category-title"><em>Signature Cocktails</em></h3>
+<div class="menu-category-rule"></div>
+<div class="menu-shared-price-banner">
+        All Signature Cocktails  <span>$18</span>
+</div>
+<div class="menu-items-grid stagger-children">
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Hugo Spritz</span>
+</div>
+<p class="menu-item-desc">St-Germain, Prosecco, Mint, Splash of Soda, Lime Wedge</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Antonio's Negroni</span>
+</div>
+<p class="menu-item-desc">Engine Italian Gin, Italian Bitter Liqueur, M&amp;R Rubino Vermouth</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Limoncello Martini</span>
+</div>
+<p class="menu-item-desc">Grey Goose Vodka, Limoncello, Triple Sec, Simple Syrup, Fresh Lemon Juice</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Bella Fiore</span>
+</div>
+<p class="menu-item-desc">Hendrick's Gin, St-Germain, Lemon Juice, Lavender Syrup, Splash of Prosecco</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Espressotini</span>
+</div>
+<p class="menu-item-desc">Absolut Vanilla Vodka, Mr Black Coffee Liqueur, Fresh Espresso, Baileys</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">The Don</span>
+</div>
+<p class="menu-item-desc">Don Fulano Reposado Tequila, Disaronno Amaretto, Lime Juice, Orange Juice, Agave Nectar, Salt Rim, Lime Wedge</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Milan to Manhattan</span>
+</div>
+<p class="menu-item-desc">Rabbit Hole Rye Whiskey, Ramazzoti Amaro, Dash of Orange Bitters, Cherry</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Peartini</span>
+</div>
+<p class="menu-item-desc">Belvedere Vodka, Pear Purée, St-Germain, Fresh Lemon Juice</p>
+</div>
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">Pictachiotini</span>
+</div>
+<p class="menu-item-desc">Absolut Vanilla Vodka, Ischia Sapori Crema di Pistachio Liqueur, Lillet Blanc, St-Germain, Crumbled Pistachio</p>
+</div>
+</div>
+</div>
+<!-- ===== WINE ===== -->
+<div class="menu-panel" id="panel-wine" role="tabpanel">
+<h3 class="menu-category-title"><em>Wine List</em></h3>
+<div class="menu-category-rule"></div>
+<!-- Sparkling by glass -->
+<h4 class="menu-wine-sub-heading">Sparkling</h4>
+<div class="menu-bottle-list stagger-children">
+<div class="menu-bottle-item">
+<span class="menu-bottle-name">Prosecco – Val D'oca, Veneto, IT <span style="font-size:0.75em;opacity:0.6;">(187mL)</span></span>
+<span class="menu-bottle-price">$12</span>
+</div>
+</div>
+<!-- White by glass/bottle -->
+<h4 class="menu-wine-sub-heading">White &amp; Rosé — By the Glass or Bottle</h4>
+<div style="overflow-x:auto;">
+<table aria-label="White and Rosé wines by glass and bottle" class="menu-wine-table stagger-children">
+<thead>
+<tr>
+<th>Wine</th>
+<th>Glass</th>
+<th>Bottle</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Rosé – Romance, Provence, FR</td><td>$14</td><td>$48</td></tr>
+<tr><td>Pinot Grigio – Anterra, Veneto, IT</td><td>$14</td><td>$48</td></tr>
+<tr><td>Sauvignon Blanc – The Crossings, Marlborough, NZ</td><td>$14</td><td>$48</td></tr>
+<tr><td>Gavi di Gavi – Franco Amoroso, Piedmont, IT</td><td>$14</td><td>$48</td></tr>
+<tr><td>Chardonnay – Seaglass (unoaked), Monterey, CA</td><td>$14</td><td>$48</td></tr>
+<tr><td>Chardonnay – Elouan, Oregon</td><td>$16</td><td>$56</td></tr>
+<tr><td>Sancerre – Karine Lauverjat, Loire, FR</td><td>$18</td><td>$63</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Red by glass/bottle -->
+<h4 class="menu-wine-sub-heading">Red — By the Glass or Bottle</h4>
+<div style="overflow-x:auto;">
+<table aria-label="Red wines by glass and bottle" class="menu-wine-table stagger-children">
+<thead>
+<tr>
+<th>Wine</th>
+<th>Glass</th>
+<th>Bottle</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Pinot Noir – Stemmari, Sicily, IT</td><td>$14</td><td>$48</td></tr>
+<tr><td>Pinot Noir – J Vineyards, California</td><td>$16</td><td>$56</td></tr>
+<tr><td>Chianti – Querceto, Tuscany, IT</td><td>$14</td><td>$48</td></tr>
+<tr><td>Valpolicella – Allegrini, Veneto, IT</td><td>$16</td><td>$56</td></tr>
+<tr><td>Super Tuscan – Argiano NC, Tuscany, IT</td><td>$18</td><td>$63</td></tr>
+<tr><td>Cabernet – Joel Gott, California</td><td>$14</td><td>$48</td></tr>
+<tr><td>Cabernet – Quilt, Napa, CA</td><td>$20</td><td>$70</td></tr>
+<tr><td>Brunello – Tenuta di Sesta, Tuscany, IT</td><td>$25</td><td>$78</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Bottle-only Sparkling -->
+<h4 class="menu-wine-sub-heading">Sparkling — Bottle Only</h4>
+<div class="menu-bottle-list stagger-children">
+<div class="menu-bottle-item">
+<span class="menu-bottle-name">Prosecco – Avissi, Veneto, IT</span>
+<span class="menu-bottle-price">$45</span>
+</div>
+<div class="menu-bottle-item">
+<span class="menu-bottle-name">Champagne – Perrier-Jouët Brut, Champagne, FR</span>
+<span class="menu-bottle-price">$125</span>
+</div>
+</div>
+<!-- Bottle-only White -->
+<h4 class="menu-wine-sub-heading">White — Bottle Only</h4>
+<div class="menu-bottle-list stagger-children">
+<div class="menu-bottle-item"><span class="menu-bottle-name">Pinot Grigio – Jermann, Friuli-Venezia Giulia, IT</span><span class="menu-bottle-price">$54</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Sauvignon Blanc – Whitehaven, Marlborough, NZ</span><span class="menu-bottle-price">$55</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Sauvignon Blanc – Cakebread Cellars, Napa, CA</span><span class="menu-bottle-price">$90</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Gavi – La Scolca 'Black Label', Piedmont, IT</span><span class="menu-bottle-price">$95</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Chardonnay – Siduri, Willamette Valley, OR</span><span class="menu-bottle-price">$65</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Chardonnay – Hartford Court, Russian River Valley, CA</span><span class="menu-bottle-price">$75</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Chardonnay – Post &amp; Beam by Far Niente, Napa, CA</span><span class="menu-bottle-price">$85</span></div>
+</div>
+<!-- Bottle-only Red -->
+<h4 class="menu-wine-sub-heading">Red — Bottle Only</h4>
+<div class="menu-bottle-list stagger-children">
+<div class="menu-bottle-item"><span class="menu-bottle-name">Pinot Noir – Lange, Willamette Valley, OR</span><span class="menu-bottle-price">$65</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Pinot Noir – Belle Glos 'Las Alturas', Santa Lucia Highlands, CA</span><span class="menu-bottle-price">$70</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Chianti Classico – Tenuta di Arceno, Tuscany, IT</span><span class="menu-bottle-price">$65</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Chianti Classico Riserva – Ruffino Ducale (Gold Label), Tuscany, IT</span><span class="menu-bottle-price">$75</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Super Tuscan – Il Fauno 'Arcanum', Tuscany, IT</span><span class="menu-bottle-price">$90</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Super Tuscan – Gaja Ca'Marcanda 'Promis', Tuscany, IT</span><span class="menu-bottle-price">$125</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Red Blend – The Prisoner, Napa, CA</span><span class="menu-bottle-price">$100</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Red Blend – Orin Swift '8 Years in the Desert', California</span><span class="menu-bottle-price">$90</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Cabernet – The Calling, Alexander Valley, CA</span><span class="menu-bottle-price">$75</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Cabernet – Freemark Abbey, Napa, CA</span><span class="menu-bottle-price">$100</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Cabernet – Post &amp; Beam by Far Niente, Napa, CA</span><span class="menu-bottle-price">$100</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Cabernet – Jordan (2019), Alexander Valley, CA</span><span class="menu-bottle-price">$160</span></div>
+<div class="menu-bottle-item"><span class="menu-bottle-name">Cabernet – Far Niente, Napa, CA</span><span class="menu-bottle-price">$250</span></div>
+</div>
+</div><!-- /#panel-wine -->
+<!-- Footnotes -->
+<div class="menu-footnotes reveal">
+<p class="menu-footnote">Prices and seasonal dishes are subject to change. We proudly prepare our foods with the freshest quality fish, meats, and produce.</p>
+<p class="menu-footnote">* Thoroughly cooking meats, poultry, seafood, shellfish, or eggs reduces the risk of food-borne illness.</p>
+<p class="menu-footnote">Questions? Call <a href="tel:+14753289854" style="color:var(--c-primary);font-weight:700;">(475) 328-9854</a>  ·  971 Boston Post Rd, Darien, CT  ·  <a href="https://antoniosdarien.com/" style="color:var(--c-primary);font-weight:700;">antoniosdarien.com</a></p>
+</div>
+</div><!-- /.menu-inner -->
+</div><!-- /.menu-section -->
+<!-- Menu tab switching script -->
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.menu-tab-btn');
+  var panels = document.querySelectorAll('.menu-panel');
+
+  tabs.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-panel');
+
+      tabs.forEach(function (t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(function (p) { p.classList.remove('active'); });
+
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      var panel = document.getElementById(targetId);
+      if (panel) {
+        panel.classList.add('active');
+        // Re-trigger stagger animations for newly visible panel
+        var staggerEls = panel.querySelectorAll('.stagger-children');
+        staggerEls.forEach(function (el) {
+          el.classList.remove('is-visible');
+          void el.offsetWidth; // reflow
+          el.classList.add('is-visible');
+        });
+      }
+    });
+  });
+})();
+</script>
 </section>
 <section id="hours_location">
 <style>
@@ -2241,13 +3433,24 @@
 <div class="contact-detail-item">
 <div aria-hidden="true" class="contact-detail-icon">
 <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+</div>
+<div class="contact-detail-text">
+<span class="contact-detail-label">Phone</span>
+<a class="contact-detail-value" href="tel:+14753289854" style="color:inherit;">(475) 328-9854</a>
+</div>
+</div>
+<div class="contact-detail-item">
+<div aria-hidden="true" class="contact-detail-icon">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
 <circle cx="12" cy="12" r="10"></circle>
 <polyline points="12 6 12 12 16 14"></polyline>
 </svg>
 </div>
 <div class="contact-detail-text">
 <span class="contact-detail-label">Reservations</span>
-<span class="contact-detail-value">Use the form to enquire about availability</span>
+<span class="contact-detail-value">Use the form or call us to enquire about availability</span>
 </div>
 </div>
 </div>
@@ -2459,6 +3662,7 @@
 <p class="footer-nav-heading">Navigate</p>
 <ul class="footer-nav-list" role="list">
 <li><a href="#about">About</a></li>
+<li><a href="#menu">Menu</a></li>
 <li><a href="#hours_location">Hours &amp; Location</a></li>
 <li><a href="#contact">Contact &amp; Reservations</a></li>
 </ul>
