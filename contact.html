@@ -80,13 +80,14 @@
 <p class="section__label">Send us a message</p>
 <h2 class="section__title" style="font-size:2rem;">Write to Antonio's</h2>
 <div class="gold-rule"></div>
-<form class="contact-form" data-contact-form="">
-<label>Name<input autocomplete="name" name="name" required="" type="text"/></label>
-<label>Email<input autocomplete="email" name="email" required="" type="email"/></label>
-<label>Phone<input autocomplete="tel" name="phone" type="tel"/></label>
-<label>Message<textarea name="message" placeholder="How can we help?" required=""></textarea></label>
+<form class="contact-form" data-contact-form="" id="contact-form" novalidate="">
+<label for="contact-name">Name<input autocomplete="name" id="contact-name" name="name" required="" type="text"/></label>
+<label for="contact-email">Email<input autocomplete="email" id="contact-email" name="email" required="" type="email"/></label>
+<label for="contact-phone">Phone<input autocomplete="tel" id="contact-phone" name="phone" type="tel"/></label>
+<label for="contact-message">Message<textarea id="contact-message" name="message" placeholder="How can we help?" required=""></textarea></label>
+<div class="g-recaptcha"></div>
 <button class="btn btn-primary" type="submit">Submit</button>
-<div class="form-status" data-form-status="" role="status"></div>
+<p aria-live="polite" class="form-status" data-form-status="" role="status"></p>
 </form>
 </div>
 </div>

@@ -128,31 +128,239 @@ function initLightbox() {
   });
 }
 
-function initContactForm() {
-  const form = document.querySelector('[data-contact-form]');
-  if (!form) return;
-  const status = form.querySelector('[data-form-status]');
+function setFormStatus(form, text, kind) {
+  const statusEl = form.querySelector('.form-status, [data-form-status]');
+  if (!statusEl) return;
+  statusEl.textContent = text;
+  statusEl.classList.toggle('is-visible', Boolean(text));
+  statusEl.classList.remove(
+    'form-status--error',
+    'form-status--success',
+    'form-status--neutral',
+    'is-error',
+    'is-success'
+  );
+  if (kind === 'error') statusEl.classList.add('form-status--error', 'is-error');
+  else if (kind === 'success') statusEl.classList.add('form-status--success', 'is-success');
+  else if (kind) statusEl.classList.add('form-status--neutral');
+}
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const data = new FormData(form);
-    const name = String(data.get('name') || '').trim();
-    const email = String(data.get('email') || '').trim();
-    const message = String(data.get('message') || '').trim();
+function setSubmittingState(form, isSubmitting, busyLabel) {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (!submitBtn) return;
+  if (isSubmitting) {
+    submitBtn.dataset.originalText = submitBtn.textContent || 'Submit';
+    submitBtn.textContent = busyLabel || 'Sending...';
+    submitBtn.disabled = true;
+    return;
+  }
+  submitBtn.textContent = submitBtn.dataset.originalText || 'Submit';
+  submitBtn.disabled = false;
+}
+
+function parseApiError(data, fallback) {
+  const detail = data && data.detail;
+  if (typeof detail === 'string' && detail.trim()) return detail;
+  if (Array.isArray(detail)) {
+    const joined = detail.map(function (d) { return d.msg || d.message || ''; }).filter(Boolean).join(' ');
+    if (joined) return joined;
+  }
+  if (data && typeof data.message === 'string' && data.message.trim()) return data.message;
+  return fallback;
+}
+
+let recaptchaScriptPromise = null;
+const RECAPTCHA_W = 304;
+const RECAPTCHA_H = 78;
+const responsiveRecaptchaBoxes = [];
+
+function scaleRecaptcha(box) {
+  const wrap = box.parentElement;
+  if (!wrap || !wrap.classList.contains('g-recaptcha-scale')) return;
+  const available = wrap.clientWidth;
+  if (!available) return;
+  const scale = Math.min(1, available / RECAPTCHA_W);
+  box.style.transform = scale < 1 ? 'scale(' + scale.toFixed(4) + ')' : 'none';
+  wrap.style.height = Math.ceil(RECAPTCHA_H * scale) + 'px';
+}
+
+function makeRecaptchaResponsive(box) {
+  if (!box || box.dataset.koraRecaptchaResponsive === 'true') return;
+  box.dataset.koraRecaptchaResponsive = 'true';
+
+  let wrap = box.parentElement;
+  if (!wrap || !wrap.classList.contains('g-recaptcha-scale')) {
+    wrap = document.createElement('div');
+    wrap.className = 'g-recaptcha-scale';
+    box.parentNode.insertBefore(wrap, box);
+    wrap.appendChild(box);
+  }
+
+  scaleRecaptcha(box);
+  const observer = new MutationObserver(function () { scaleRecaptcha(box); });
+  observer.observe(box, { childList: true, subtree: true });
+  responsiveRecaptchaBoxes.push(box);
+}
+
+let recaptchaResizeTimer = null;
+window.addEventListener('resize', function () {
+  window.clearTimeout(recaptchaResizeTimer);
+  recaptchaResizeTimer = window.setTimeout(function () {
+    responsiveRecaptchaBoxes.forEach(scaleRecaptcha);
+  }, 150);
+});
+
+function ensureRecaptchaScript(siteKey) {
+  if (!siteKey) return Promise.resolve();
+  if (typeof window.grecaptcha !== 'undefined') return Promise.resolve();
+  if (recaptchaScriptPromise) return recaptchaScriptPromise;
+  recaptchaScriptPromise = new Promise(function (resolve, reject) {
+    const existing = document.querySelector('script[data-kora-recaptcha="true"]');
+    if (existing) {
+      existing.addEventListener('load', function () { resolve(); });
+      existing.addEventListener('error', function () { reject(new Error('reCAPTCHA failed to load')); });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    script.dataset.koraRecaptcha = 'true';
+    script.onload = function () { resolve(); };
+    script.onerror = function () { reject(new Error('reCAPTCHA failed to load')); };
+    document.head.appendChild(script);
+  });
+  return recaptchaScriptPromise;
+}
+
+function getRecaptchaToken(form) {
+  if (typeof window.grecaptcha === 'undefined') return '';
+  const recaptchaEl = form.querySelector('.g-recaptcha');
+  if (!recaptchaEl) return '';
+  return window.grecaptcha.getResponse() || '';
+}
+
+function resetRecaptcha(form) {
+  if (typeof window.grecaptcha === 'undefined') return;
+  if (form.querySelector('.g-recaptcha')) window.grecaptcha.reset();
+}
+
+/**
+ * Kora public forms API — POST {apiBaseUrl}/api/v1/public/forms/submit
+ * Requires reCAPTCHA v2 token (captcha_token) + business_id matching the Kora site.
+ */
+function initContactForm() {
+  const form = document.getElementById('contact-form') || document.querySelector('[data-contact-form]');
+  if (!form || form.dataset.bound) return;
+  form.dataset.bound = 'true';
+
+  const config = window.KORA_SITE_CONFIG || {};
+  const apiBaseUrl = (config.apiBaseUrl || '').replace(/\/+$/, '');
+  const businessId = config.businessId || '';
+  const recaptchaSiteKey = (config.recaptchaSiteKey || '').trim();
+  const recaptchaEl = form.querySelector('.g-recaptcha');
+
+  if (recaptchaEl && recaptchaSiteKey) {
+    recaptchaEl.setAttribute('data-sitekey', recaptchaSiteKey);
+    makeRecaptchaResponsive(recaptchaEl);
+    form.addEventListener(
+      'focusin',
+      function () {
+        ensureRecaptchaScript(recaptchaSiteKey).catch(function () {
+          setFormStatus(form, 'Security check failed to load. Please refresh and try again.', 'error');
+        });
+      },
+      { once: true }
+    );
+  } else if (recaptchaEl && !recaptchaSiteKey) {
+    recaptchaEl.style.display = 'none';
+  }
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const firstName = ((form.querySelector('[name="first_name"]') || {}).value || '').trim();
+    const lastName = ((form.querySelector('[name="last_name"]') || {}).value || '').trim();
+    const email = ((form.querySelector('[name="email"]') || {}).value || '').trim();
+    const phone = ((form.querySelector('[name="phone"]') || {}).value || '').trim();
+    const message = ((form.querySelector('[name="message"]') || {}).value || '').trim();
+    const name =
+      ((form.querySelector('[name="name"]') || {}).value || '').trim() ||
+      (firstName + ' ' + lastName).trim() ||
+      firstName ||
+      lastName;
 
     if (!name || !email || !message) {
-      if (status) {
-        status.textContent = 'Please complete name, email, and message.';
-        status.className = 'form-status is-error';
-      }
+      setFormStatus(form, 'Please fill in your name, email, and message.', 'error');
       return;
     }
 
-    if (status) {
-      status.textContent = 'Thank you. Your message is ready to send—our team will respond shortly. For immediate help call ' + '(475) 328-9854.';
-      status.className = 'form-status is-success';
+    if (!businessId || !apiBaseUrl) {
+      setFormStatus(form, 'Form submission is not configured for this site.', 'error');
+      return;
     }
-    form.reset();
+
+    if (recaptchaEl && !recaptchaSiteKey) {
+      setFormStatus(form, 'Form temporarily unavailable.', 'error');
+      return;
+    }
+
+    if (recaptchaEl && recaptchaSiteKey) {
+      try {
+        await ensureRecaptchaScript(recaptchaSiteKey);
+      } catch (err) {
+        setFormStatus(form, 'Security check failed to load. Please refresh and try again.', 'error');
+        return;
+      }
+      const captchaCheck = getRecaptchaToken(form);
+      if (!captchaCheck) {
+        setFormStatus(form, 'Please complete the security check.', 'error');
+        return;
+      }
+    }
+
+    const captchaToken = getRecaptchaToken(form);
+    setSubmittingState(form, true, 'Sending...');
+    setFormStatus(form, 'Sending...', 'neutral');
+
+    const formData = {
+      name: name,
+      email: email,
+      message: message,
+    };
+    if (phone) formData.phone = phone;
+    if (firstName) formData.first_name = firstName;
+    if (lastName) formData.last_name = lastName;
+
+    try {
+      const response = await fetch(apiBaseUrl + '/api/v1/public/forms/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          business_id: businessId,
+          form_type: 'contact',
+          form_data: formData,
+          submitter_email: email,
+          captcha_token: captchaToken || '',
+        }),
+      });
+      const data = await response.json().catch(function () { return {}; });
+      if (!response.ok) {
+        throw new Error(parseApiError(data, 'Something went wrong. Please try again or call us at (475) 328-9854.'));
+      }
+      form.reset();
+      resetRecaptcha(form);
+      setFormStatus(form, data.message || 'Thank you! Your message has been received.', 'success');
+    } catch (error) {
+      resetRecaptcha(form);
+      setFormStatus(
+        form,
+        (error && error.message) || 'Something went wrong. Please try again or call us at (475) 328-9854.',
+        'error'
+      );
+    } finally {
+      setSubmittingState(form, false);
+    }
   });
 }
 

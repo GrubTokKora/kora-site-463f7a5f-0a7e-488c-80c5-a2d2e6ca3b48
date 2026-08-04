@@ -941,16 +941,32 @@ h1, h2, h3, h4, .font-heading {
   padding: 0.75rem 1rem;
   font-size: 0.95rem;
   display: none;
+  margin-top: 0.25rem;
 }
-.form-status.is-success {
+.form-status.is-visible {
+  display: block;
+}
+.form-status.is-success,
+.form-status.form-status--success {
   display: block;
   background: rgba(95, 155, 64, 0.12);
   color: #2f5c1c;
 }
-.form-status.is-error {
+.form-status.is-error,
+.form-status.form-status--error {
   display: block;
   background: rgba(161, 46, 55, 0.1);
   color: var(--color-brand-primary);
+}
+.form-status.form-status--neutral {
+  display: block;
+  background: rgba(12, 12, 12, 0.05);
+  color: var(--color-brand-muted, #5b564d);
+}
+.g-recaptcha-scale {
+  overflow: hidden;
+  max-width: 100%;
+  margin-top: 0.25rem;
 }
 .media-duo {
   display: grid;
