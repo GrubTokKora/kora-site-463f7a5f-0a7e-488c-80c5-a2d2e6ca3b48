@@ -1,3 +1,57 @@
+/* Source for assets/styles.css — Kora backend recompiles this file. */
 @import "tailwindcss";
 @source "../**/*.html";
-@source "../assets/**/*.js";
+@source "../js/**/*.js";
+
+/* KORA_BRAND_THEME_START */
+@theme {
+  --color-brand-primary: #a12e37;
+  --color-brand-secondary: #f1eadf;
+  --color-brand-accent: #0c0c0c;
+  --color-brand-dark: #0c0c0c;
+  --color-brand-muted: #5b564d;
+  --color-brand-soft: #f1eadf;
+  --color-brand-gold: #c5a352;
+  --color-brand-border: rgba(12, 12, 12, 0.12);
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Roboto Slab", Georgia, serif;
+  --font-brand: "Italiana", "Playfair Display", serif;
+}
+/* KORA_BRAND_THEME_END */
+
+/* KORA_BRAND_BASE_START */
+@layer base {
+  :root {
+    --header-h: 4.75rem;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    /* Bridge for site.css var() usage if @theme names differ slightly after compile */
+    --color-brand-primary: #a12e37;
+    --color-brand-secondary: #f1eadf;
+    --color-brand-accent: #0c0c0c;
+    --color-brand-dark: #0c0c0c;
+    --color-brand-muted: #5b564d;
+    --color-brand-soft: #f1eadf;
+    --color-brand-gold: #c5a352;
+    --color-brand-border: rgba(12, 12, 12, 0.12);
+    --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Roboto Slab", Georgia, serif;
+    --font-brand: "Italiana", "Playfair Display", serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-brand-accent);
+    background: var(--color-brand-secondary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+/* KORA_BRAND_BASE_END */

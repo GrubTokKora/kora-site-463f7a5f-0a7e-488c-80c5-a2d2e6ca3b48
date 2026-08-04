@@ -1,3 +1,38 @@
+/* Component UI layer (loaded after assets/styles.css).
+   Brand tokens mirrored here so UI keeps working if Tailwind rebuilds styles.css. */
+:root {
+  --color-brand-primary: #a12e37;
+  --color-brand-secondary: #f1eadf;
+  --color-brand-accent: #0c0c0c;
+  --color-brand-dark: #0c0c0c;
+  --color-brand-muted: #5b564d;
+  --color-brand-soft: #f1eadf;
+  --color-brand-gold: #c5a352;
+  --color-brand-border: rgba(12, 12, 12, 0.12);
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Roboto Slab", Georgia, serif;
+  --font-brand: "Italiana", "Playfair Display", serif;
+  --header-h: 4.75rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--color-brand-accent);
+  background: var(--color-brand-secondary);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; }
+ul { list-style: none; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.hidden { display: none !important; }
 /* Antonio's Italian Bistro — premium modern restaurant UI */
 
 body { padding-top: var(--header-h); }
