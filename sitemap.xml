@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://antoniosdarien.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://antoniosdarien.com/about</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/menu</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://antoniosdarien.com/gallery</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/events</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/private-events</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/pizza-truck</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/reservations</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/contact</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://antoniosdarien.com/privacy-policy</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
