@@ -159,17 +159,22 @@ function initContactForm() {
 function initHeroVideo() {
   const wrap = document.querySelector('.hero__yt');
   if (!wrap) return;
-  // Prefer cinematic video when YouTube can load; keep photo as continuous fallback.
-  const iframe = wrap.querySelector('iframe');
-  if (!iframe) return;
+  // Prefer cinematic video when ready; keep photo as continuous fallback.
+  const video = wrap.querySelector('video');
+  if (!video) return;
   const activate = function () {
     wrap.classList.add('is-active');
   };
-  // Delay activation so poster paints first; iframe autoplay is best-effort.
-  window.setTimeout(activate, 1800);
-  iframe.addEventListener('load', function () {
-    window.setTimeout(activate, 600);
-  });
+  if (video.readyState >= 2) {
+    activate();
+  } else {
+    video.addEventListener('canplay', activate, { once: true });
+    video.addEventListener('playing', activate, { once: true });
+  }
+  const playAttempt = video.play();
+  if (playAttempt && typeof playAttempt.catch === 'function') {
+    playAttempt.catch(function () {});
+  }
 }
 
 function getHeaderOffset() {
