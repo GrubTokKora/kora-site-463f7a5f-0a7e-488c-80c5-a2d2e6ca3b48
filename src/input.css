@@ -13,9 +13,10 @@
   --color-brand-soft: #f1eadf;
   --color-brand-gold: #c5a352;
   --color-brand-border: rgba(12, 12, 12, 0.12);
-  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Roboto Slab", Georgia, serif;
-  --font-brand: "Italiana", "Playfair Display", serif;
+  --font-heading: var(--kora-font-heading, "Playfair Display"), Georgia, "Times New Roman", serif;
+  --font-body: var(--kora-font-body, "Roboto Slab"), Georgia, serif;
+  --font-accent: var(--kora-font-accent, "Italiana"), "Playfair Display", serif;
+  --font-brand: var(--font-accent);
 }
 /* KORA_BRAND_THEME_END */
 
@@ -33,9 +34,9 @@
     --color-brand-soft: #f1eadf;
     --color-brand-gold: #c5a352;
     --color-brand-border: rgba(12, 12, 12, 0.12);
-    --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
-    --font-body: "Roboto Slab", Georgia, serif;
-    --font-brand: "Italiana", "Playfair Display", serif;
+    --font-heading: var(--kora-font-heading, "Playfair Display"), Georgia, "Times New Roman", serif;
+    --font-body: var(--kora-font-body, "Roboto Slab"), Georgia, serif;
+    --font-brand: var(--font-accent);
   }
 
   html {
