@@ -95,7 +95,6 @@ change to the site's content can land there; the rest only make the site work or
 - `llms.txt` — Business details, address, phone number, and a list of website pages for Antonio's Italian Bistro: Antonio's Italian Bistro, Home, About, Menu, Gallery, Events, Private Events, Pizza Truck, Reservations, Contact, Privacy Policy  [content]
 - `robots.txt` — 26 bytes — too small to hold content
 - `sitemap.xml` — 110 bytes — too small to hold content
-- `assets/site.css` — Site styles and CSS variables for layout, typography, and color tokens
 - `js/includes.js` — Global site header, footer, navigation links, brand logo, phone number, address, and external URLs (ordering, gift cards, map): About, Menu, Gallery, Events, Private Events, Pizza Truck, Contact, Order Online, Gift Cards, Our Locations, Reservations, Privacy Policy  [content]
 - `js/main.js` — Site behaviour, navigation, animations, form handling, API configuration and reCAPTCHA logic
 

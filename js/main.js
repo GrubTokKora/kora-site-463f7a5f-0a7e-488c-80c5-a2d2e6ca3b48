@@ -429,29 +429,27 @@ function centerChipInScroller(btn, scroller) {
   scroller.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
 }
 
-/** Ensure category bar has track + sliding red underline indicator. */
-function ensureCategoryTrack(bar) {
-  if (!bar) return null;
-  let scroller = bar.querySelector('.menu-categories-scroll');
-  if (!scroller) return null;
+/*
+ * Menu page. Kora draws the menus from the site's menu data into the kora:data:menu region:
+ * a .kora-menu__switcher of board tabs (Kora's own script shows one menu at a time) and, in a
+ * menu with several sections, a .kora-menu__nav of category links. Here the category links
+ * become line-tabs that show one category at a time, as the hand-written menu did.
+ */
 
-  let track = scroller.querySelector('.menu-categories-track');
+/** Wrap a category nav's links in a track with the sliding red underline. */
+function ensureCategoryTrack(nav) {
+  if (!nav) return null;
+  let track = nav.querySelector('.kora-menu__nav-track');
   if (!track) {
     track = document.createElement('div');
-    track.className = 'menu-categories-track';
-    track.setAttribute('role', scroller.getAttribute('role') || 'tablist');
-    const label = scroller.getAttribute('aria-label');
-    if (label) track.setAttribute('aria-label', label);
-    scroller.removeAttribute('role');
-    scroller.removeAttribute('aria-label');
-    while (scroller.firstChild) track.appendChild(scroller.firstChild);
-    scroller.appendChild(track);
+    track.className = 'kora-menu__nav-track';
+    while (nav.firstChild) track.appendChild(nav.firstChild);
+    nav.appendChild(track);
   }
-
-  let indicator = track.querySelector('.menu-category-indicator');
+  let indicator = track.querySelector('.kora-menu__nav-indicator');
   if (!indicator) {
     indicator = document.createElement('span');
-    indicator.className = 'menu-category-indicator';
+    indicator.className = 'kora-menu__nav-indicator';
     indicator.setAttribute('aria-hidden', 'true');
     track.appendChild(indicator);
   }
@@ -459,151 +457,115 @@ function ensureCategoryTrack(bar) {
 }
 
 /** Slide the thick red underline under the active category. */
-function updateCategoryIndicator(panel) {
-  if (!panel) return;
-  const bar = panel.querySelector('.menu-categories-bar');
-  const track = ensureCategoryTrack(bar);
+function updateCategoryIndicator(menu) {
+  const nav = menu && menu.querySelector('.kora-menu__nav');
+  const track = ensureCategoryTrack(nav);
   if (!track) return;
 
-  const indicator = track.querySelector('.menu-category-indicator');
-  const active = track.querySelector('.menu-category.active');
-  if (!indicator || !active) {
-    if (indicator) indicator.classList.remove('is-ready');
+  const indicator = track.querySelector('.kora-menu__nav-indicator');
+  const active = track.querySelector('a.is-active');
+  if (!indicator || !active || menu.hidden) {
+    if (indicator && !active) indicator.classList.remove('is-ready');
     return;
   }
 
-  const left = active.offsetLeft;
-  const width = active.offsetWidth;
   const first = !indicator.classList.contains('is-ready');
   if (first) indicator.style.transition = 'none';
-
-  indicator.style.width = width + 'px';
-  indicator.style.transform = 'translateX(' + left + 'px)';
+  indicator.style.width = active.offsetWidth + 'px';
+  indicator.style.transform = 'translateX(' + active.offsetLeft + 'px)';
   indicator.classList.add('is-ready');
-
   if (first) {
     void indicator.offsetWidth;
     indicator.style.transition = '';
   }
 }
 
-/** Pin parent board tabs under the header + center the active board tab. */
-function scrollToBoardTabs(behavior) {
-  const boardsBar = document.querySelector('.menu-boards-bar');
-  if (!boardsBar) return;
-  const activeTab = boardsBar.querySelector('.menu-board-tab.is-active');
-  afterLayout(function () {
-    scrollElementUnderHeader(boardsBar, behavior || 'smooth');
-    if (activeTab) centerChipInScroller(activeTab, boardsBar);
-  });
-}
-
-/** Pin sticky category bar under the header (All Day only) + center chip. */
-function scrollToCategoryBar(panel, behavior) {
-  if (!panel) return;
-  const bar = panel.querySelector('.menu-categories-bar');
-  if (!bar) {
-    scrollToBoardTabs(behavior);
-    return;
-  }
-  const activeChip = bar.querySelector('.menu-category.active');
-  const scroller = bar.querySelector('.menu-categories-scroll');
-  afterLayout(function () {
-    scrollElementUnderHeader(bar, behavior || 'smooth');
-    if (activeChip) centerChipInScroller(activeChip, scroller);
-    updateCategoryIndicator(panel);
-  });
-}
-
-function filterMenu(category, board, options) {
+/** Show one category of a menu, with the cards fading in one after another. */
+function showCategory(menu, sectionId, options) {
   options = options || {};
-  const panel = document.querySelector('[data-board-panel="' + board + '"]');
-  if (!panel) return;
+  const nav = menu.querySelector('.kora-menu__nav');
+  if (!nav) return;
+  const section = sectionId && menu.querySelector('#' + CSS.escape(sectionId));
+  const target = section || menu.querySelector('.kora-menu__section');
+  if (!target) return;
 
-  // Category filtering only applies to All Day Menu
-  if (board !== 'all-day-menu') return;
-
-  panel.querySelectorAll('.menu-category').forEach(function (btn) {
-    btn.classList.toggle('active', btn.dataset.category === category);
+  nav.querySelectorAll('a').forEach(function (link) {
+    const on = link.getAttribute('href') === '#' + target.id;
+    link.classList.toggle('is-active', on);
+    if (on) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
   });
-  updateCategoryIndicator(panel);
-
-  let visibleIndex = 0;
-  panel.querySelectorAll('[data-menu-category]').forEach(function (card) {
-    const match = card.dataset.menuCategory === category;
-    card.classList.toggle('hidden', !match);
-    if (match) {
-      card.classList.remove('fade-in');
-      void card.offsetWidth;
-      card.classList.add('fade-in');
-      card.style.animationDelay = visibleIndex * 0.05 + 's';
-      visibleIndex += 1;
-    } else {
-      card.classList.remove('fade-in');
-      card.style.animationDelay = '';
-    }
+  menu.querySelectorAll('.kora-menu__section').forEach(function (s) {
+    s.classList.toggle('is-filtered-out', s !== target);
   });
-
-  if (options.scroll !== false) {
-    scrollToCategoryBar(panel, 'smooth');
-  }
-}
-
-function switchMenuBoard(board) {
-  document.querySelectorAll('.menu-board-tab').forEach(function (btn) {
-    const active = btn.dataset.menuBoard === board;
-    btn.classList.toggle('is-active', active);
-    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  target.querySelectorAll('.kora-menu__item').forEach(function (card, index) {
+    card.classList.remove('fade-in');
+    void card.offsetWidth;
+    card.classList.add('fade-in');
+    card.style.animationDelay = index * 0.05 + 's';
   });
-  document.querySelectorAll('[data-board-panel]').forEach(function (panel) {
-    panel.classList.toggle('hidden', panel.dataset.boardPanel !== board);
-  });
+  updateCategoryIndicator(menu);
 
-  if (board === 'all-day-menu') {
-    const panel = document.querySelector('[data-board-panel="all-day-menu"]');
-    const active = panel && panel.querySelector('.menu-category.active');
-    const firstCat = panel && panel.querySelector('.menu-category');
-    const chip = active || firstCat;
-    if (chip) filterMenu(chip.dataset.category, board, { scroll: false });
+  if (options.scroll) {
+    const active = nav.querySelector('a.is-active');
     afterLayout(function () {
-      updateCategoryIndicator(panel);
+      scrollElementUnderHeader(nav, 'smooth');
+      if (active) centerChipInScroller(active, nav);
+      updateCategoryIndicator(menu);
     });
   }
+}
 
-  // Same auto-scroll-to-view as category bar: pin board tabs under the header
-  scrollToBoardTabs('smooth');
+/** Pin the board tabs under the header + center the active tab. */
+function scrollToBoardTabs(root) {
+  const switcher = root.querySelector('.kora-menu__switcher');
+  if (!switcher) return;
+  const active = switcher.querySelector('a[aria-current="true"]');
+  afterLayout(function () {
+    scrollElementUnderHeader(switcher, 'smooth');
+    if (active) centerChipInScroller(active, switcher);
+  });
 }
 
 function initMenuFilters() {
-  const section = document.getElementById('menu-section');
-  if (!section || section.dataset.menuBound === 'true') return;
-  section.dataset.menuBound = 'true';
+  const root = document.querySelector('#menu-section .kora-menu');
+  if (!root || root.dataset.menuBound === 'true') return;
+  root.dataset.menuBound = 'true';
+  root.classList.add('is-enhanced');
 
-  section.querySelectorAll('.menu-board-tab').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      switchMenuBoard(btn.dataset.menuBoard);
+  const hash = location.hash.slice(1);
+  root.querySelectorAll('.kora-menu__menu, .kora-menu > .kora-menu__section').forEach(function (menu) {
+    const nav = menu.querySelector('.kora-menu__nav');
+    if (!nav) return;
+    menu.classList.add('is-filterable');
+    ensureCategoryTrack(nav);
+    const fromHash = hash && menu.querySelector('.kora-menu__section#' + CSS.escape(hash));
+    showCategory(menu, fromHash ? hash : null);
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        showCategory(menu, id, { scroll: true });
+        history.replaceState(null, '', '#' + id);
+      });
     });
   });
 
-  section.querySelectorAll('.menu-category').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filterMenu(btn.dataset.category, btn.dataset.board, { scroll: true });
-    });
-  });
-
-  // Line-tab setup + initial underline position
-  section.querySelectorAll('.menu-categories-bar').forEach(function (bar) {
-    ensureCategoryTrack(bar);
-    const panel = bar.closest('[data-board-panel]');
-    afterLayout(function () {
-      updateCategoryIndicator(panel);
+  // Kora's tab script switches the menu first (its listener was added earlier); then settle the view.
+  root.querySelectorAll('.kora-menu__switcher a').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      afterLayout(function () {
+        root.querySelectorAll('.is-filterable').forEach(updateCategoryIndicator);
+      });
+      scrollToBoardTabs(root);
     });
   });
 
   window.addEventListener(
     'resize',
     function () {
-      section.querySelectorAll('[data-board-panel]').forEach(updateCategoryIndicator);
+      root.querySelectorAll('.is-filterable').forEach(updateCategoryIndicator);
     },
     { passive: true }
   );
