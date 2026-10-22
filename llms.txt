@@ -1,6 +1,26 @@
 # Antonio's Italian Bistro
-Tradition meets innovation in Darien.
-Address: 971 Boston Post Rd, Darien, CT 06820, USA
-Phone: (475) 328-9854
-Web: https://antoniosdarien.com/
-Pages: Home, About, Menu, Gallery, Events, Private Events, Pizza Truck, Reservations, Contact, Privacy Policy
+
+> Antonio's Italian Bistro is located in Darien, CT, offering sophisticated Italian dining. The menu features a comprehensive selection of classic Italian dishes, including appetizers, fresh salads, traditional pastas, chicken, veal, seafood entrees, and brick oven pizzas with generous portions.
+
+## Menu
+Antonio's Italian Bistro offers a comprehensive menu of classic Italian dishes, featuring appetizers, fresh salads, traditional pasta, chicken, veal, and seafood entrees. They are also known for their brick oven pizzas and generous portions, often featuring daily specials.
+
+## Location & Contact
+- Address: 971 Boston Post Rd, Darien, CT 06820-4506, United States
+- Phone: +14753289854
+
+## Hours
+- Monday: 11:00 AM – 9:00 PM
+- Tuesday: 11:00 AM – 9:00 PM
+- Wednesday: 11:00 AM – 9:00 PM
+- Thursday: 11:00 AM – 9:00 PM
+- Friday: 11:00 AM – 9:00 PM
+- Saturday: 11:00 AM – 9:00 PM
+- Sunday: 11:00 AM – 9:00 PM
+
+## Action Links
+- [Reserve a Table](https://antoniosdarien.com/reservations)
+- [Order Online](https://order.toasttab.com/online/antonios-971-boston-post-road)
+
+## Social
+- [YouTube](https://www.youtube.com/watch?v=O6yqNoMXRM8)
